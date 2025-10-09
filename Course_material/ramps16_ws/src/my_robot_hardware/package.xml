@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>my_robot_hardware</name>
+  <version>0.0.1</version>
+  <description>ROS 2 node that talks to an Arduino (RAMPS 1.6) stepper controller.</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <!-- Build system -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- ROS 2 dependencies -->
+  <depend>rclcpp</depend>
+  <!-- ROS 2 lifecycle node dependencies -->
+  <depend>rclcpp_lifecycle</depend>
+  <!-- ROS 2 hardware interface dependencies -->
+  <depend>hardware_interface</depend>
+  <!-- ROS 2 plugin library dependencies -->
+  <depend>pluginlib</depend>
+
+  <!-- System deps (rosdep-resolved) -->
+  <build_depend>pkg-config</build_depend>
+  <depend>libserial-dev</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

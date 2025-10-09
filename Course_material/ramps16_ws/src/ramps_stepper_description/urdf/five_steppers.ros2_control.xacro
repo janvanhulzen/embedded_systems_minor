@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="Arm" type="system">
+        <hardware>
+            <!-- <plugin>mock_components/GenericSystem</plugin>
+            <param name="calculate_dynamics">true</param> -->
+            <plugin>arm_hardware/ArmHardwareInterface</plugin>
+            <param name="port">/dev/ttyACM0</param>
+            <param name="baudrate">57600</param>
+            <param name="motor_id_1">1</param>
+            <param name="motor_id_2">2</param>
+            <param name="motor_id_3">3</param>
+            <param name="motor_id_4">4</param>
+            <param name="motor_id_5">5</param>
+            <param name="steps_per_rev">200.0</param>
+            <param name="hex_dump">false</param>
+            <param name="probe">false</param>
+            <param name="protocol">register</param>
+        </hardware>
+        <joint name="axis_1">
+            <command_interface name="velocity" />
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+        <joint name="axis_2">
+            <command_interface name="velocity" />
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+        <joint name="axis_3">
+            <command_interface name="velocity" />
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+        <joint name="axis_4">
+            <command_interface name="velocity" />
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+        <joint name="axis_5">
+            <command_interface name="velocity" />
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+    </ros2_control>
+
+</robot>

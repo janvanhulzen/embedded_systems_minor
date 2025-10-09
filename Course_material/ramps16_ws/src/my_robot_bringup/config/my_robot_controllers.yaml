@@ -1,0 +1,14 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 10
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    arm_joints_controller:
+      type: forward_command_controller/ForwardCommandController
+      
+arm_joints_controller:
+  ros__parameters:
+    joints: ["axis_1", "axis_2", "axis_3", "axis_4", "axis_5"]
+    interface_name: "velocity"

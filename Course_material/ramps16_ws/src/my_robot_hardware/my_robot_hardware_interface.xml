@@ -1,0 +1,15 @@
+<library path="my_robot_hardware">
+  <class name="arm_hardware/ArmHardwareInterface"
+         type="arm_hardware::ArmHardwareInterface"
+         base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Hardware interface for an arm with 2 stepper motors.
+        </description>
+    </class>
+</library>
+
+    <!-- Build system -->
+    <!-- name and type has namespace and class : mobile_base_hardware::MobileBaseHardwareInterface -->
+    <!-- name and type has namespace and class : arm_hardware::ArmHardwareInterface -->
+    <!-- base class type has namespace and class of parent class we inherit from -->
+    <!-- Desciption is just a text with a dsicription of what we are dealing with. -->

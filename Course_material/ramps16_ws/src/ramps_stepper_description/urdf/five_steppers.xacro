@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="stepper_width" value="0.5" />
+    <xacro:property name="stepper_height" value="0.5" />
+    <xacro:property name="load_width" value="0.05" />
+    <xacro:property name="load_length" value="0.4" />
+    <xacro:property name="load_height" value="0.3" />
+    <xacro:property name="x_position_first_stepper" value="-1.5" />
+    <xacro:property name="x_position_stepper_offset" value="0.75" />
+
+    <xacro:property name="axis_radius" value="0.05" />
+    <xacro:property name="axis_length" value="0.3" />
+
+    <link name="base_link" />
+    
+
+    <xacro:macro name="stepper_number" params="number">
+        <xacro:property name="num" value="${int(number)}"/>
+        <link name="stepper_${number}">
+            <visual>
+                <geometry>
+                    <box size="${stepper_width} ${stepper_width} ${stepper_height}" />
+                </geometry>
+                <origin xyz="0 0 ${stepper_height/ 2.0}" rpy="0 0 0" />
+                <material name="blue" />
+            </visual>
+        </link>
+        
+        <link name="axis_${number}">
+            <visual>
+                <geometry>
+                    <cylinder radius="${axis_radius}" length="${axis_length}" />
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <material name="grey" />
+            </visual>
+        </link>
+
+        <link name="load_${number}">
+            <visual>
+                <geometry>
+                    <box size="${load_length} ${load_width} ${load_height}" />
+                </geometry>
+                <origin xyz="${load_length/2.0+axis_radius} 0 0" rpy="0 0 0" />
+                <material name="red" />
+            </visual>
+        </link>
+
+        <joint name="stepper_${number}_joint" type="fixed">
+        <!-- For stepper 1: attach to base -->
+        <xacro:if value="${num == 1}">
+            <parent link="base_link" />
+            <child link="stepper_${number}" />
+            <origin xyz="${x_position_first_stepper} 0 0" rpy="0 0 0" />
+        </xacro:if>
+
+        <!-- For all others: attach to previous stepper -->
+        <xacro:unless value="${num == 1}">
+            <parent link="stepper_${num - 1}" />
+            <child link="stepper_${number}" />
+            <origin xyz="${x_position_stepper_offset} 0 0" rpy="0 0 0" />
+        </xacro:unless>
+        </joint>
+
+        <joint name="axis_${number}" type="continuous">
+            <parent link="stepper_${number}" />
+            <child link="axis_${number}" />
+            <origin xyz="0 0 ${stepper_height+axis_length/2.0}" rpy="0 0 0" />
+            <axis xyz="0 0 1" />
+        </joint>
+
+        <joint name="load_${number}_joint" type="fixed">
+            <parent link="axis_${number}" />
+            <child link="load_${number}" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <axis xyz="0 0 1" />
+        </joint>
+    </xacro:macro>
+    
+    <xacro:stepper_number number="1" />
+    <xacro:stepper_number number="2" />
+    <xacro:stepper_number number="3" />
+    <xacro:stepper_number number="4" />
+    <xacro:stepper_number number="5" /> 
+
+
+
+</robot>
